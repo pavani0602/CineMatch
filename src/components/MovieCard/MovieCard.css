@@ -1,0 +1,53 @@
+
+.movie-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 100%;
+  min-width: 0;
+  padding: 16px;
+  border: 1px solid #4A3E34;
+  border-radius: var(--radius-card);
+  background: var(--color-surface);
+  color: var(--color-text);
+  overflow-wrap: anywhere;
+}
+
+.movie-card h2 {
+  margin: 0;
+  color: var(--color-accent);
+  font-size: 19px;
+  line-height: 1.4;
+}
+
+.movie-card p {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.movie-card .favorite-button {
+  margin-top: auto;
+}
+
+.movie-poster,
+.poster-placeholder {
+  width: 100%;
+  aspect-ratio: 2 / 2.5;
+  border-radius: 8px;
+}
+
+.movie-poster {
+  display: block;
+  object-fit: cover;
+}
+
+.poster-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg);
+  color: var(--color-muted);
+  text-align: center;
+}

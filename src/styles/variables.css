@@ -1,0 +1,13 @@
+
+:root {
+  --color-bg: #211D1A;
+  --color-surface: #38302A;
+  --color-accent: #D9B89C;
+  --color-text: #F3EDE4;
+  --color-muted: #B8ADA2;
+
+  --font-main: Arial, Helvetica, sans-serif;
+
+  --radius-card: 12px;
+  --page-padding: 32px;
+}

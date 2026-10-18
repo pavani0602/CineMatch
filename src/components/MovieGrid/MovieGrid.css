@@ -1,0 +1,36 @@
+
+.movie-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+  padding: 24px var(--page-padding);
+  align-items: stretch;
+}
+
+/* Let the grid determine each card's width */
+.movie-grid article {
+  width: 100%;
+  min-width: 0;
+  padding: 0;
+  background: transparent;
+}
+
+@media (max-width: 1000px) {
+  .movie-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  .movie-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    padding: 16px;
+  }
+}
+
+@media (max-width: 450px) {
+  .movie-grid {
+    grid-template-columns: 1fr;
+  }
+}

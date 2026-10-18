@@ -1,0 +1,371 @@
+/* ==========================================================================
+   Home Page Core Background & Base Layout
+   ========================================================================== */
+.home-page {
+  min-height: 100vh;
+  background-color: #191412; /* Cohesive dark theme background canvas */
+}
+
+/* ==========================================================================
+   Hero Section Component
+   ========================================================================== */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 80vh; /* Takes up 80% of the viewport height */
+  min-height: 550px;
+  max-height: 800px;
+  overflow: hidden;
+}
+
+/* Background image filling the canvas */
+.hero-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 25%; /* Keeps focal characters properly framed */
+  z-index: 1;
+}
+
+/* Cinematic horizontal dark mask protecting text readability */
+.hero-gradient-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(25, 20, 18, 0.92) 0%,
+    rgba(25, 20, 18, 0.75) 40%,
+    rgba(25, 20, 18, 0.35) 75%,
+    rgba(25, 20, 18, 0.15) 100%
+  );
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Absolute content position layout stacking */
+.hero-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  max-width: 700px;
+  padding: 80px var(--page-padding, 64px); 
+  z-index: 3;
+  box-sizing: border-box;
+}
+
+.hero-eyebrow {
+  margin-bottom: 16px;
+  color: var(--color-accent, #d9b89c);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.hero h1 {
+  margin: 0 0 20px 0;
+  color: #ffffff;
+  font-size: clamp(38px, 4.8vw, 62px);
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -1.5px;
+  text-shadow: 0 2px 15px rgba(0, 0, 0, 0.5);
+}
+
+.hero h1 span {
+  display: inline;
+  color: var(--color-accent, #d9b89c);
+}
+
+.hero-description {
+  max-width: 500px;
+  margin: 0 0 36px 0;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 16px;
+  line-height: 1.7;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* Explore Movies Interactive Button */
+.hero-button {
+  padding: 14px 30px;
+  border: 1px solid var(--color-accent, #d9b89c);
+  border-radius: 8px;
+  background: var(--color-accent, #d9b89c);
+  color: var(--color-bg, #191412);
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s ease, filter 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hero-button:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+  box-shadow: 0 6px 20px rgba(217, 184, 156, 0.35);
+}
+
+/* ==========================================================================
+   Trending Movies Layout Section
+   ========================================================================== */
+.trending-section {
+  padding: 40px 0 0px; /* Kept at 0px to pull genre section up flush */
+  background: var(--color-bg, #191412);
+}
+
+.section-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 0 var(--page-padding, 32px);
+  margin-bottom: 24px;
+}
+
+.section-eyebrow {
+  margin-bottom: 6px;
+  color: var(--color-accent, #D9B89C);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.section-heading h2 {
+  color: var(--color-text, #F3EDE4);
+  font-size: 28px;
+  line-height: 1.3;
+  margin: 0;
+}
+
+.view-all-link {
+  padding-bottom: 5px;
+  color: var(--color-accent, #D9B89C);
+  font-size: 14px;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.view-all-link:hover {
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   Premium Movie-Poster Genre Section
+   ========================================================================== */
+.genre-section {
+  padding: 20px var(--page-padding, 64px) 80px; 
+  background-color: var(--color-bg, #191412);
+}
+
+/* Flex row setting for the genre heading layout */
+.genre-section .section-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 28px;
+  padding: 0;
+}
+
+.section-subtitle-right {
+  color: #a39287;
+  font-size: 14px;
+  margin: 0;
+  padding-bottom: 4px;
+}
+
+/* Premium 4-Column dynamic grid track */
+.genre-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+/* 
+   The Genre Card Container:
+   Uses standard poster 2:3 aspect ratio instead of a squished fixed height.
+*/
+.genre-card {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 2 / 3; /* Fluid dynamic rectangle sizing */
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  cursor: pointer;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.2s ease;
+}
+
+/* Background image filling card scale boundaries safely */
+.genre-card-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 1;
+  transition: transform 0.5s ease;
+}
+
+/* Dark cinematic mask shading for typography safety */
+.genre-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(25, 20, 18, 0.95) 0%,
+    rgba(25, 20, 18, 0.6) 45%,
+    rgba(25, 20, 18, 0.2) 100%
+  );
+  z-index: 2;
+}
+
+/* Container arranging floating text contents */
+.genre-card-content {
+  position: absolute;
+  inset: 0;
+  padding: 24px 20px;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Soft frosted glass ring design wrapping emojis */
+.genre-icon {
+  font-size: 18px;
+  background: rgba(25, 20, 18, 0.6);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  align-self: flex-start;
+}
+
+.genre-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-right: 28px; /* Leave space for arrow block */
+}
+
+.genre-name {
+  color: #ffffff;
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.genre-desc {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 13px;
+  margin: 0;
+  line-height: 1.3;
+}
+
+/* Navigation button anchored nicely on lower-right inside card */
+.genre-arrow-btn {
+  position: absolute;
+  bottom: 24px;
+  right: 20px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  z-index: 4;
+  transition: all 0.2s ease;
+}
+
+/* ==========================================================================
+   Hover Animations (Premium Polish Triggers)
+   ========================================================================== */
+.genre-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--color-accent, #d9b89c);
+}
+
+.genre-card:hover .genre-card-bg {
+  transform: scale(1.05); /* Soft background zoom */
+}
+
+.genre-card:hover .genre-arrow-btn {
+  background-color: var(--color-accent, #d9b89c);
+  color: var(--color-bg, #191412);
+  border-color: var(--color-accent, #d9b89c);
+}
+
+/* ==========================================================================
+   Responsive Viewport Adaptability
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .genre-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns on tablet */
+    gap: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    height: 70vh;
+    min-height: 480px;
+  }
+
+  .hero-gradient-overlay {
+    background: linear-gradient(
+      to top,
+      rgba(25, 20, 18, 0.98) 0%,
+      rgba(25, 20, 18, 0.8) 60%,
+      rgba(25, 20, 18, 0.1) 100%
+    );
+  }
+
+  .hero-content {
+    padding: 40px 24px;
+    max-width: 100%;
+  }
+
+  .hero h1 {
+    font-size: 36px;
+  }
+}
+
+@media (max-width: 600px) {
+  .trending-section {
+    padding-top: 28px;
+  }
+
+  .section-heading {
+    padding: 0 20px;
+  }
+
+  .section-heading h2 {
+    font-size: 23px;
+  }
+
+  .genre-grid {
+    grid-template-columns: 1fr; /* Single column on phones */
+  }
+
+  .genre-section .section-heading {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}

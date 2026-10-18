@@ -60,22 +60,26 @@ function App() {
   ];  
   return (
     <>
-      <Header 
-          title="CineMatch" 
-          links={links}
-          isLoggedIn={false}
-          userProfileImg="https://example.com/user-profile.jpg"
-        />
+      
       <Routes>
         <Route
           path="/"
           element={
+            <>
+            <Header 
+              title="CineMatch" 
+              links={links}
+              isLoggedIn={false}
+              userProfileImg="https://example.com/user-profile.jpg"
+            />
             <Home
               movies={movies}
               favorites={favorites}
               onAddToFavorites={handleAddToFavorites}
               onRemoveFromFavorites={handleRemoveFromFavorites}
             />
+            <Footer />
+            </>
           }
         />
         <Route
@@ -118,7 +122,7 @@ function App() {
           } 
           /> */}
         </Routes>
-        <Footer />
+        
     </>
   )
 }

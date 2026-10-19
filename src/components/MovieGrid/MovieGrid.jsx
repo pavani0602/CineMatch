@@ -4,6 +4,11 @@ function MovieGrid(props) {
   const { movies , onAddToFavorites, onRemoveFromFavorites, favorites } = props;
   return (
     <div className="movie-grid">
+      {movies.length === 0 && (
+        <div className="no-movies-found">
+          <p>No movies found matching your criteria.</p>
+        </div>
+      )}
       {movies.map((movie) => (
         <MovieCard
           key={movie.id}

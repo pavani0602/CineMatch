@@ -15,6 +15,18 @@
   background: transparent;
 }
 
+.no-movies-found {
+  grid-column: 1 / -1;       /* Span across all grid columns */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 60px 20px;
+  color: #888;               /* Adjust color to fit your theme */
+  font-size: 1.1rem;
+}
+
 @media (max-width: 1000px) {
   .movie-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));

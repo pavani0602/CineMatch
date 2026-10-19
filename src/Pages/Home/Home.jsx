@@ -18,7 +18,7 @@ function Home(props) {
             {/* Floating Text Stack */}
             <div className="hero-content">
             <p className="hero-eyebrow">YOUR NEXT FAVORITE FILM AWAITS</p>
-            <h1>Find your next <span>favorite story.</span></h1>
+            <h1>Find your next <span>Obsession.</span></h1>
             <p className="hero-description">
                 Discover movies worth watching, save the ones you love, and build your own personal movie collection.
             </p>

@@ -1,104 +1,158 @@
-
+/* ==========================================================================
+   Discover Page Canvas Structure
+   ========================================================================== */
 .discover-page {
   min-height: 100vh;
-  padding-top: 55px;
+  width:100%;
+  background-color: var(--color-bg); /* Evaluates to #211D1A */
+  padding: 80px var(--page-padding); /* Evaluates to 32px padding margins */
+  box-sizing: border-box;
 }
 
-.discover-heading {
-  padding: 0 var(--page-padding);
+/* ==========================================================================
+   Serif Typography Layout Header
+   ========================================================================== */
+.discover-intro {
+  margin-bottom: 48px;
+  max-width: 1500px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.discover-eyebrow {
-  margin-bottom: 10px;
-  color: var(--color-accent);
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 2px;
+.discover-intro h1 {
+  margin: 0 0 12px 0;
+  color: var(--color-text); /* Evaluates to #F3EDE4 */
+  font-family: 'Playfair Display', 'Georgia', serif; /* Cinematic editorial brand standard */
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 500;
+  letter-spacing: -0.5px;
 }
 
-.discover-heading h1 {
-  margin-bottom: 10px;
-  font-size: clamp(34px, 5vw, 52px);
-  line-height: 1.2;
+.discover-intro p {
+  margin: 0;
+  color: var(--color-muted); /* Evaluates to #B8ADA2 */
+  font-family: var(--font-main);
+  font-size: 15px;
+  font-weight: 400;
 }
 
-.discover-heading > p:last-child {
-  color: var(--color-muted);
-  font-size: 16px;
+/* ==========================================================================
+   Elevated Controls Panel Box Component
+   ========================================================================== */
+.discover-controls-container {
+  background-color: var(--color-surface); /* Evaluates to #38302A for a beautiful step-up contrast */
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+  padding: 36px 40px;
+  max-width: 1500px;
+  margin: 0 auto;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
 }
 
-.discover-controls {
-  display: flex;
-  gap: 14px;
-  padding: 30px var(--page-padding) 24px;
-}
-
-.movie-search,
-.movie-sort {
-  min-height: 46px;
-  border: 1px solid #51453A;
-  border-radius: 8px;
-  outline: none;
-  background: var(--color-surface);
-  color: var(--color-text);
-  font: inherit;
-}
-
-.movie-search {
-  flex: 1;
-  min-width: 0;
-  padding: 0 16px;
-}
-
-.movie-search::placeholder {
-  color: var(--color-muted);
-}
-
-.movie-search:focus,
-.movie-sort:focus {
-  border-color: var(--color-accent);
-}
-
-.movie-sort {
-  padding: 0 12px;
-}
-
-.discover-results-heading {
+/* Unified search layout row featuring line rule separation boundary */
+.discover-search-wrapper {
+  position: relative;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 0 var(--page-padding);
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 28px;
 }
 
-.discover-results-heading h2 {
-  font-size: 24px;
+.search-icon {
+  width: 20px;
+  height: 20px;
+  color: var(--color-accent); /* Evaluates to #D9B89C brand cream color */
+  margin-right: 16px;
+  flex-shrink: 0;
 }
 
-.discover-results-heading span {
+.discover-search-wrapper input[type="text"] {
+  width: 100%;
+  border: none;
+  background: transparent;
+  color: var(--color-text);
+  font-family: var(--font-main);
+  font-size: 22px;
+  outline: none;
+}
+
+.discover-search-wrapper input[type="text"]::placeholder {
   color: var(--color-muted);
-  font-size: 14px;
+  opacity: 0.5;
 }
 
-@media (max-width: 600px) {
+/* ==========================================================================
+   Multi-Column Selector Grid Track
+   ========================================================================== */
+.discover-filter-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 clean symmetrical input buckets */
+  gap: 24px;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Metadata tags positioned directly above input fields */
+.filter-label {
+  font-family: var(--font-main);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--color-muted);
+  letter-spacing: 1.5px;
+  opacity: 0.8;
+}
+
+.filter-group select {
+  width: 100%;
+  padding: 14px 16px;
+  font-family: var(--font-main);
+  font-size: 14px;
+  color: var(--color-text);
+  background-color: var(--color-bg); /* Inset deep canvas tone backdrop background */
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 4px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+  /* Custom chevron SVG dynamic map linking back to brand accent hex value */
+  appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://w3.org' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23D9B89C' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'></polyline></svg>");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  background-size: 14px;
+}
+
+/* Hover & active interact states */
+.filter-group select:hover,
+.filter-group select:focus {
+  border-color: var(--color-accent); /* Highlights cleanly to #D9B89C */
+}
+
+/* Target fallback options panel lists inside desktop default drawers */
+.filter-group select option {
+  background-color: var(--color-surface);
+  color: var(--color-text);
+}
+
+/* ==========================================================================
+   Responsive Adaptability Track
+   ========================================================================== */
+@media (max-width: 768px) {
   .discover-page {
-    padding-top: 35px;
+    padding: 40px var(--page-padding);
   }
-
-  .discover-heading {
-    padding: 0 20px;
-  }
-
-  .discover-controls {
-    flex-direction: column;
+  
+  .discover-controls-container {
     padding: 24px 20px;
   }
 
-  .movie-sort {
-    min-height: 44px;
-  }
-
-  .discover-results-heading {
-    padding: 0 20px;
+  .discover-filter-grid {
+    grid-template-columns: 1fr; /* Dropdowns cleanly stack on smaller mobile layouts */
+    gap: 16px;
   }
 }

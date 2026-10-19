@@ -8,7 +8,8 @@ import Footer from './components/Footer/Footer.jsx';
 // import './App.css'
 
 function App() {
-  const links = ["Home", "Discover", "Watchlist", "Favorites"];
+  const linksHome = ["Home", "Discover", "Watchlist", "Favorites"];
+  const linksDiscover = ["Home","Movies", "TV Shows", "Anime"]
   const [favorites, setFavorites] = useState([]);
   
   function handleAddToFavorites(movie) {
@@ -31,7 +32,8 @@ function App() {
       description: "A heartwarming tale of love and destiny.",
       year: 2022,
       rating: 8.5,
-      poster: "/public/sita-ramam.png"
+      poster: "/public/sita-ramam.png",
+      genre: "Romance"
     },
     {
       id:2,
@@ -39,7 +41,8 @@ function App() {
       description: "An epic journey across uncharted lands.",
       year: 2021,
       rating: 7.8,
-      poster: "/public/the-great-adventure.png"
+      poster: "/public/the-great-adventure.png",
+      genre: "Romance"
     },
     {
       id:3,
@@ -47,7 +50,8 @@ function App() {
       description: "A thrilling mystery that keeps you on the edge.",
       year: 2023,
       rating: 9.0,
-      poster: "/public/mystery-of-the-night.png"
+      poster: "/public/mystery-of-the-night.png",
+      genre:"Thriller"
     },
     {
       id:4,
@@ -55,7 +59,8 @@ function App() {
       description: "A hilarious comedy that will leave you in stitches.",
       year: 2020,
       rating: 7.2,
-      poster: "/public/my-name-is-nobody.png"
+      poster: "/public/my-name-is-nobody.png",
+      genre:"Comedy"
     }
   ];  
   return (
@@ -68,9 +73,10 @@ function App() {
             <>
             <Header 
               title="CineMatch" 
-              links={links}
+              links={linksHome}
               isLoggedIn={false}
               userProfileImg="https://example.com/user-profile.jpg"
+              variant="Home"
             />
             <Home
               movies={movies}
@@ -107,12 +113,21 @@ function App() {
         <Route
           path="/discover"
           element={
-            <Discover
-              movies={movies}
-              favorites={favorites}
-              onAddToFavorites={handleAddToFavorites}
-              onRemoveFromFavorites={handleRemoveFromFavorites}
-            />
+            <>
+              <Header 
+                title="CineMatch" 
+                links={linksDiscover}
+                isLoggedIn={false}
+                userProfileImg="https://example.com/user-profile.jpg"
+                variant="discover"
+              />
+              <Discover
+                movies={movies}
+                favorites={favorites}
+                onAddToFavorites={handleAddToFavorites}
+                onRemoveFromFavorites={handleRemoveFromFavorites}
+              />
+            </>
           }
         />
         {/* <Route

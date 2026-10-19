@@ -1,10 +1,17 @@
 import './Discover.css';
 import {useState} from 'react';
+import { useSearchParams } from 'react-router-dom';
 import MovieGrid from '../../components/MovieGrid/MovieGrid';
 function Discover(props) {
   const {movies, favorites, onAddToFavorites, onRemoveFromFavorites} = props;
+  const [searchParams,setSearchParams]=useSearchParams();
+  // const genreFromUrl=searchParams.get('genre');
   const[searchText,setSearchText]=useState('');
-  const[selectedGenre,setSelectedGenre]=useState('All genres');
+  const[selectedGenre,setSelectedGenre]=useState(()=>{
+    const genre=searchParams.get('genre');
+    if(genre===null) return 'All genres';
+    return genre.charAt(0).toUpperCase()+genre.slice(1);
+  });
   const[selectedYear,setSelectedYear]=useState('Any year');
   const[selectedRating,setSelectedRating]=useState('Any rating');
   const filteredMovies = movies.filter((movie) => {
@@ -37,7 +44,7 @@ function Discover(props) {
     }
     return matchesSearch && matchesGenre && matchesYear && matchesRating;
   });
-
+  
   return (
     <main className="discover-page">
       <section className="discover-intro">
@@ -64,9 +71,20 @@ function Discover(props) {
             <select
               name="genre"
               value={selectedGenre}
-              onChange={(event)=>setSelectedGenre(event.target.value)}
+              onChange={(event)=>{
+                const genre=event.target.value;
+                setSelectedGenre(genre);
+                if(genre==='All genres'){
+                  searchParams.delete('genre');
+                }
+                else {
+                  searchParams.set('genre',genre.toLowerCase());
+                }
+                setSearchParams(searchParams);
+              }}
             >
               <option>All genres</option>
+              <option>Action</option>
               <option>Drama</option>
               <option>Romance</option>
               <option>Thriller</option>

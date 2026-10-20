@@ -87,7 +87,7 @@
    ========================================================================== */
 .discover-filter-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 clean symmetrical input buckets */
+  grid-template-columns: repeat(4, 1fr) 0.75fr; /* 3 clean symmetrical input buckets */
   gap: 24px;
 }
 
@@ -156,3 +156,103 @@
     gap: 16px;
   }
 }
+/* ==========================================================================
+   Sort Selection Track Styling
+   ========================================================================== */
+.sorting-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sorting-label {
+  font-family: var(--font-main);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--color-muted);
+  letter-spacing: 1.5px;
+  opacity: 0.8;
+}
+
+.sorting-group select {
+  width: 100%;
+  padding: 14px 16px;
+  font-family: var(--font-main);
+  font-size: 14px;
+  color: var(--color-text);
+  background-color: var(--color-bg); /* Inset deep canvas tone backdrop background */
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 4px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+  /* Custom chevron SVG dynamic map linking back to brand accent hex value */
+  appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://w3.org' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23D9B89C' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'></polyline></svg>");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  background-size: 14px;
+}
+
+/* Hover & active interact states */
+.sorting-group select:hover,
+.sorting-group select:focus {
+  border-color: var(--color-accent); /* Highlights cleanly to #D9B89C */
+}
+
+/* Target fallback options panel lists inside desktop default drawers */
+.sorting-group select option {
+  background-color: var(--color-surface);
+  color: var(--color-text);
+}
+
+.clear-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.clear-label {
+  font-family: var(--font-main);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--color-muted);
+  letter-spacing: 1.5px;
+  opacity: 0.8;
+  text-transform: uppercase;
+}
+
+.clear-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  /* Height-matching padding (14px top/bottom) and line-height reset to align with select menus */
+  padding: 14px 16px; 
+  line-height: 1.3;
+  box-sizing: border-box;
+  
+  font-family: var(--font-main);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text);
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  cursor: pointer;
+  outline: none;
+  transition: background-color 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
+}
+
+/* Hover dynamic micro-interactions */
+.clear-btn:hover,
+.clear-btn:focus {
+  background-color: rgba(255, 255, 255, 0.04);
+  border-color: var(--color-accent);
+}
+
+.clear-btn:active {
+  opacity: 0.8;
+}
+

@@ -14,6 +14,7 @@ function Discover(props) {
   });
   const[selectedYear,setSelectedYear]=useState('Any year');
   const[selectedRating,setSelectedRating]=useState('Any rating');
+  const[sortBy,setSortBy]=useState('default');
   const filteredMovies = movies.filter((movie) => {
     const matchesSearch = movie.title.toLowerCase().includes(searchText.toLowerCase());
     const matchesGenre = 
@@ -44,6 +45,24 @@ function Discover(props) {
     }
     return matchesSearch && matchesGenre && matchesYear && matchesRating;
   });
+  const sortedMovies=[...filteredMovies];
+  if (sortBy === 'rating') {
+    sortedMovies.sort((a, b) => b.rating - a.rating);
+  } else if (sortBy === 'newest') {
+    sortedMovies.sort((a, b) => b.year - a.year);
+  }
+  const handleClearFilters=()=>{
+    setSearchText('');
+    setSelectedGenre('All genres');
+    setSelectedRating('Any rating');
+    setSelectedYear('Any year');
+    setSortBy('default');
+    // setSearchParams({}); (Clears all query parameters)
+    //clears only genre query
+    const newParams = new URLSearchParams(searchParams); //creates copy of current query parameters
+    newParams.delete('genre'); //deletes genre parameter
+    setSearchParams(newParams); //updates url.
+  }
   
   return (
     <main className="discover-page">
@@ -115,12 +134,42 @@ function Discover(props) {
               <option>6.5+</option>
             </select>
           </div>
+          <div className='sorting-group'>
+            <span className='sorting-label'>SORT BY</span>
+            <select 
+              name="sorting"
+              value={sortBy}
+              onChange={(event)=>setSortBy(event.target.value)}>
+              <option value="default">Default order</option>
+              <option value="newest">Newest releases</option>
+              <option value="rating">Highest rated</option>
+              </select>
+          </div>
+          <div className="clear-group">
+            <span className="clear-label">CLEAR</span>
+            <button className="clear-btn" onClick={handleClearFilters}>
+              {/* Refresh/Clear loop icon from your image reference */}
+              <svg 
+                width="14" 
+                height="14" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2.5" 
+                strokeLinecap="round" 
+                strokeLinejoin="round"
+              >
+                <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/>
+              </svg>
+              Clear Filters
+            </button>
+          </div> 
         </div>
       </section>
       <section>
         <div className="discover-movies">
           <MovieGrid 
-            movies={filteredMovies}
+            movies={sortedMovies}
             onAddToFavorites={onAddToFavorites}
             onRemoveFromFavorites={onRemoveFromFavorites}
             favorites={favorites}

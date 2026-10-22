@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Header from './components/Header/Header.jsx'
 import MovieGrid from './components/MovieGrid/MovieGrid.jsx'
 import {Routes, Route} from 'react-router-dom';
@@ -10,7 +10,25 @@ import Footer from './components/Footer/Footer.jsx';
 function App() {
   const linksHome = ["Home", "Discover", "Watchlist", "Favorites"];
   const linksDiscover = ["Home","Movies", "TV Shows", "Anime"]
-  const [favorites, setFavorites] = useState([]);
+  const [favorites, setFavorites] = useState(() => {
+    try {
+      //saving favorite movies in localstorage
+      const savedFavorites = localStorage.getItem('favorites');
+
+      if (savedFavorites === null) {
+        return [];
+      }
+      //restoring into a javascript object
+      const parsedFavorites = JSON.parse(savedFavorites);
+
+      return Array.isArray(parsedFavorites) ? parsedFavorites : [];
+    } catch (error) {
+      return [];
+    }
+  });
+  useEffect(() => {
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+  }, [favorites]);
   
   function handleAddToFavorites(movie) {
     setFavorites((prevFavorites) =>

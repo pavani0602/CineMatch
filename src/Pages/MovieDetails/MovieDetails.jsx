@@ -1,12 +1,16 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import FavoriteButton from '../../components/FavriteButton/FavoriteButton.jsx';
+import WatchlistButton from '../../components/WatchlistButton/WatchlistButton.jsx';
 import './MovieDetails.css';
 
 function MovieDetails({
   movies,
   onAddToFavorites,
   onRemoveFromFavorites,
-  favorites
+  favorites,
+  watchlist,
+  onAddToWatchlist,
+  onRemoveFromWatchlist
 }) {
   const { id } = useParams();
   const movie = movies.find((movie) => movie.id === Number(id));
@@ -56,7 +60,12 @@ function MovieDetails({
               onRemoveFromFavorites={onRemoveFromFavorites}
               isFavorite={isFavorite}
             />
-
+            <WatchlistButton
+              movie={movie}
+              onAddToWatchlist={onAddToWatchlist}
+              onRemoveFromWatchlist={onRemoveFromWatchlist}
+              isInWatchlist={watchlist.some((item) => item.id === movie.id)}
+            />
             <button className="btn-secondary">
               ＋ Add to Watchlist
             </button>

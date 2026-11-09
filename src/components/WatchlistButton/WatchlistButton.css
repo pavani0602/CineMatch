@@ -1,0 +1,24 @@
+.watchlist-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: transparent;
+  border: none;
+  color: #F3EDE4;
+
+  padding: 8px;
+  border-radius: 50%;
+  cursor: pointer;
+
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.watchlist-button:hover {
+  color: #D9B89C;
+  transform: scale(1.1);
+}
+
+.watchlist-button.active {
+  color: #D9B89C;
+}

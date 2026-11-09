@@ -4,7 +4,7 @@ import './Home.css';
 
 function Home(props) {
     const navigate = useNavigate();
-    const {movies, favorites, onAddToFavorites, onRemoveFromFavorites} = props;
+    const {movies, favorites, watchlist, onAddToFavorites, onRemoveFromFavorites, onAddToWatchlist, onRemoveFromWatchlist} = props;
 
     return (
         <main className="home-page">
@@ -49,6 +49,9 @@ function Home(props) {
                 favorites={favorites}
                 onAddToFavorites={onAddToFavorites}
                 onRemoveFromFavorites={onRemoveFromFavorites}
+                watchlist={watchlist}
+                onAddToWatchlist={onAddToWatchlist}
+                onRemoveFromWatchlist={onRemoveFromWatchlist}
             />
         </section>
 

@@ -3,7 +3,7 @@ import {useState} from 'react';
 import { useSearchParams } from 'react-router-dom';
 import MovieGrid from '../../components/MovieGrid/MovieGrid';
 function Discover(props) {
-  const {movies, favorites, onAddToFavorites, onRemoveFromFavorites} = props;
+  const {movies, favorites, onAddToFavorites, onRemoveFromFavorites,watchlist, onAddToWatchlist, onRemoveFromWatchlist} = props;
   const [searchParams,setSearchParams]=useSearchParams();
   // const genreFromUrl=searchParams.get('genre');
   const[searchText,setSearchText]=useState('');
@@ -173,6 +173,9 @@ function Discover(props) {
             onAddToFavorites={onAddToFavorites}
             onRemoveFromFavorites={onRemoveFromFavorites}
             favorites={favorites}
+            watchlist={watchlist}
+            onAddToWatchlist={onAddToWatchlist}
+            onRemoveFromWatchlist={onRemoveFromWatchlist}
           />
         </div>
       </section>

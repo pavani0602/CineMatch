@@ -10,7 +10,36 @@ import MovieDetails from './Pages/MovieDetails/MovieDetails.jsx';
 
 function App() {
   const linksHome = ["Home", "Discover", "Watchlist", "Favorites"];
-  const linksDiscover = ["Home","Movies", "TV Shows", "Anime"]
+  const linksDiscover = ["Home","Movies", "TV Shows", "Anime"];
+  const [watchlist, setWatchlist] = useState(() => {
+    try {
+      //saving watchlist movies in localstorage
+      const savedWatchlist = localStorage.getItem('watchlist');
+      if (savedWatchlist === null) {
+        return [];
+      }   
+  //restoring into a javascript object
+      const parsedWatchlist = JSON.parse(savedWatchlist);
+      return Array.isArray(parsedWatchlist) ? parsedWatchlist : [];
+    } catch (error) {
+      return [];
+    }
+  });
+  useEffect(() => {
+    localStorage.setItem('watchlist', JSON.stringify(watchlist));
+  }, [watchlist]);
+  function handleAddToWatchlist(movie) {
+    setWatchlist((prevWatchlist) =>
+      !prevWatchlist.some((item) => item.id === movie.id)
+        ? [...prevWatchlist, movie]
+        : prevWatchlist
+    );
+  }
+  function handleRemoveFromWatchlist(movieId) {
+    setWatchlist((prevWatchlist) =>
+      prevWatchlist.filter((movie) => movie.id !== movieId)
+    );
+  }
   const [favorites, setFavorites] = useState(() => {
     try {
       //saving favorite movies in localstorage
@@ -104,8 +133,11 @@ function App() {
             <Home
               movies={movies}
               favorites={favorites}
+              watchlist={watchlist}
               onAddToFavorites={handleAddToFavorites}
               onRemoveFromFavorites={handleRemoveFromFavorites}
+              onAddToWatchlist={handleAddToWatchlist}
+              onRemoveFromWatchlist={handleRemoveFromWatchlist}
             />
             <Footer />
             </>
@@ -119,18 +151,56 @@ function App() {
             onAddToFavorites={handleAddToFavorites}
             onRemoveFromFavorites={handleRemoveFromFavorites}
             favorites={favorites}
+            watchlist={watchlist}
+            onAddToWatchlist={handleAddToWatchlist}
+            onRemoveFromWatchlist={handleRemoveFromWatchlist}
           />
+          }
+        />
+        <Route 
+          path="/watchlist"
+          element={
+            <>  
+              <Header
+                title="CineMatch" 
+                links={linksHome}
+                isLoggedIn={false}
+                userProfileImg="https://example.com/user-profile.jpg"
+                variant="Home"
+              />
+              <MovieGrid
+                movies={watchlist}
+                favorites={favorites}
+                onAddToFavorites={handleAddToFavorites}
+                onRemoveFromFavorites={handleRemoveFromFavorites}
+                onAddToWatchlist={handleAddToWatchlist}
+                onRemoveFromWatchlist={handleRemoveFromWatchlist}
+                watchlist={watchlist}
+              />
+            </>
           }
         />
         <Route
           path="/favorites" 
           element={
+            <>
+            <Header 
+              title="CineMatch" 
+              links={linksHome}
+              isLoggedIn={false}
+              userProfileImg="https://example.com/user-profile.jpg"
+              variant="Home"
+            />
             <MovieGrid 
               movies={favorites}
               onAddToFavorites={handleAddToFavorites}
               onRemoveFromFavorites={handleRemoveFromFavorites}
               favorites={favorites}
+              watchlist={watchlist}
+              onAddToWatchlist={handleAddToWatchlist}
+              onRemoveFromWatchlist={handleRemoveFromWatchlist} 
             />
+            </>
           }
         />  
         <Route
@@ -149,6 +219,9 @@ function App() {
                 favorites={favorites}
                 onAddToFavorites={handleAddToFavorites}
                 onRemoveFromFavorites={handleRemoveFromFavorites}
+                watchlist={watchlist} 
+                onAddToWatchlist={handleAddToWatchlist}
+                onRemoveFromWatchlist={handleRemoveFromWatchlist}
               />
             </>
           }
@@ -161,15 +234,12 @@ function App() {
               onAddToFavorites={handleAddToFavorites}
               onRemoveFromFavorites={handleRemoveFromFavorites}
               favorites={favorites}
+              watchlist={watchlist}
+              onAddToWatchlist={handleAddToWatchlist}
+              onRemoveFromWatchlist={handleRemoveFromWatchlist}
             />
           }
         />
-        {/* <Route
-          path="/watchlist" 
-          element={
-
-          } 
-          /> */}
         </Routes>
         
     </>

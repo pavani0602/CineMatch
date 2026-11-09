@@ -1,10 +1,8 @@
+import { Bookmark } from 'lucide-react';
+import './WatchlistButton.css';
+
 function WatchlistButton(props) {
-  const {
-    movie,
-    onAddToWatchlist,
-    onRemoveFromWatchlist,
-    isInWatchlist
-  } = props;
+  const {movie,onAddToWatchlist,onRemoveFromWatchlist,isInWatchlist} = props;
 
   function handleClick() {
     if (isInWatchlist) {
@@ -16,20 +14,15 @@ function WatchlistButton(props) {
 
   return (
     <button
-      type="button"
+      className={`watchlist-button ${isInWatchlist ? 'active' : ''}`}
       onClick={handleClick}
-      aria-label={
-        isInWatchlist
-          ? 'Remove from watchlist'
-          : 'Add to watchlist'
-      }
-      title={
-        isInWatchlist
-          ? 'Remove from watchlist'
-          : 'Add to watchlist'
-      }
+      title={isInWatchlist ? 'Remove from Watchlist' : 'Add to Watchlist'}
+      aria-label={isInWatchlist ? 'Remove from Watchlist' : 'Add to Watchlist'}
     >
-      {isInWatchlist ? '🔖' : '♧'}
+      <Bookmark
+        size={21}
+        fill={isInWatchlist ? 'currentColor' : 'none'}
+      />
     </button>
   );
 }

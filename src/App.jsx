@@ -5,6 +5,7 @@ import {Routes, Route} from 'react-router-dom';
 import Discover from './Pages/Discover/Discover.jsx';
 import Home from './Pages/Home/Home.jsx';
 import Footer from './components/Footer/Footer.jsx';
+import MovieDetails from './Pages/MovieDetails/MovieDetails.jsx';
 // import './App.css'
 
 function App() {
@@ -51,7 +52,8 @@ function App() {
       year: 2022,
       rating: 8.5,
       poster: "/public/sita-ramam.png",
-      genre: "Romance"
+      genre: "Romance",
+      trailerUrl: "https://www.youtube.com/embed/Ljk6tGZ1l3A"
     },
     {
       id:2,
@@ -60,7 +62,8 @@ function App() {
       year: 2021,
       rating: 7.8,
       poster: "/public/the-great-adventure.png",
-      genre: "Romance"
+      genre: "Romance",
+      trailerUrl: "https://www.youtube.com/embed/NhSz86YpihM"
     },
     {
       id:3,
@@ -69,7 +72,8 @@ function App() {
       year: 2023,
       rating: 9.0,
       poster: "/public/mystery-of-the-night.png",
-      genre:"Thriller"
+      genre:"Thriller",
+      trailerUrl: "https://www.youtube.com/embed/t6_XoTqimP4"
     },
     {
       id:4,
@@ -78,7 +82,8 @@ function App() {
       year: 2020,
       rating: 7.2,
       poster: "/public/my-name-is-nobody.png",
-      genre:"Comedy"
+      genre:"Comedy",
+      trailerUrl: "https://www.youtube.com/embed/TMUX8y8bXWE"
     }
   ];  
   return (
@@ -146,6 +151,17 @@ function App() {
                 onRemoveFromFavorites={handleRemoveFromFavorites}
               />
             </>
+          }
+        />
+        <Route
+          path="/movie/:id"
+          element={
+            <MovieDetails
+              movies={movies}
+              onAddToFavorites={handleAddToFavorites}
+              onRemoveFromFavorites={handleRemoveFromFavorites}
+              favorites={favorites}
+            />
           }
         />
         {/* <Route
